@@ -1,55 +1,53 @@
-**Automating NDD Print Agent Deployment via PowerShell & Intune**
+# Automating NDD Print Agent Deployment with PowerShell and Intune
 
-📝 Project Description
-This project features an automation script developed to solve the challenge of installing and configuring the NDD Print monitoring agent at scale.
+## Overview
+PowerShell script that automates the silent installation and configuration of the NDD Print monitoring agent, used to track printing on machines with USB-connected printers. The script was tested in a pilot group of about 10 machines before a wider rollout.
 
-In Enterprise environments, manual configuration of .ini files and individual agent installations are slow processes prone to human error. This solution enables silent deployment and standardization of network settings via Microsoft Intune or SCCM.
+## Technologies
+- PowerShell: installation logic and file handling
+- Microsoft Intune: deployment to endpoints
+- MSI: silent (unattended) installation
 
-🛠️ Technologies Used
-PowerShell: Installation logic and file manipulation.
+## Features
+- **Logging:** detailed logs in `C:\Windows\Temp` for remote troubleshooting.
+- **Directory check:** verifies that the target folder exists before creating it.
+- **Automated configuration:** copies a sanitized `nddprint.ini` so the agent points to the monitoring server after install. Replace the placeholders with your own environment values.
 
-Microsoft Intune / SCCM: Orchestration and endpoint deployment.
+## How to use
+1. Clone this repository.
+2. Put the `.msi` installer and the `.ini` file (with your own addresses) in the same folder as the script.
+3. Run `Install-NDDPrint.ps1` as Administrator, or package it as `.intunewin` to deploy with Intune.
 
-MSI Technology: Silent (unattended) installation.
+## Known limitations / next steps
+- Return the MSI exit code to Intune so failed installs are reported correctly.
+- Add a check for an already installed agent before reinstalling.
 
-🚀 Features
-Full Logging: Generates detailed logs in C:\Windows\Temp to facilitate remote troubleshooting.
+> No company data is included in this repository.
 
-Idempotency: Verifies directory existence before creation, preventing errors during re-executions.
+---
 
-Automated Configuration: Deploys a sanitized nddprint.ini file, ensuring the agent points to the correct monitoring server immediately after installation.
+# Versão em Português
 
-📦 How to Use
-Clone this repository.
+## Visão geral
+Script em PowerShell que automatiza a instalação silenciosa e a configuração do agente de monitoramento NDD Print, usado para acompanhar a impressão em máquinas com impressoras USB. O script foi testado em um grupo-piloto de cerca de 10 máquinas antes de um deploy mais amplo.
 
-Add the .msi installer and the .ini file (configured with your environment's network addresses) to the same folder as the script.
+## Tecnologias
+- PowerShell: lógica de instalação e manipulação de arquivos
+- Microsoft Intune: deploy nos endpoints
+- MSI: instalação silenciosa
 
-Package it as a .intunewin (if using Intune) or run Install-NDDPrint.ps1 with Administrator privileges.
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Portuguese Version**
+## Funcionalidades
+- **Logs:** gera logs detalhados em `C:\Windows\Temp` para troubleshooting remoto.
+- **Verificação de diretório:** confere se a pasta de destino existe antes de criá-la.
+- **Configuração automática:** copia um `nddprint.ini` sanitizado para o agente apontar ao servidor de monitoramento após a instalação. Troque os valores de exemplo pelos do seu ambiente.
 
-📝 Descrição do Projeto
-Este projeto apresenta um script de automação desenvolvido para resolver o desafio de instalar e configurar o agente de monitoramento de impressão NDD Print em larga escala.
+## Como usar
+1. Clone este repositório.
+2. Coloque o instalador `.msi` e o arquivo `.ini` (com seus endereços) na mesma pasta do script.
+3. Execute `Install-NDDPrint.ps1` como Administrador, ou empacote como `.intunewin` para usar no Intune.
 
-Em ambientes Enterprise, a configuração manual de arquivos .ini e a instalação individual de agentes são processos lentos e sujeitos a falhas humanas. Esta solução permite o deploy silencioso e a padronização das configurações de rede via Microsoft Intune ou SCCM.
+## Limitações e próximos passos
+- Devolver o código de saída do MSI ao Intune, para falhas de instalação serem reportadas.
+- Verificar se o agente já está instalado antes de reinstalar.
 
-🛠️ Tecnologias Utilizadas
-PowerShell: Lógica de instalação e manipulação de arquivos.
-
-Microsoft Intune / SCCM: Orquestração e deploy em endpoints.
-
-MSI Technology: Instalação silenciosa (unattended).
-
-🚀 Funcionalidades
-Logging Completo: Gera logs detalhados em C:\Windows\Temp para facilitar o troubleshooting remoto.
-
-Idempotência: Verifica a existência de diretórios antes da criação, evitando erros em re-execuções.
-
-Configuração Automática: Realiza o deploy do arquivo nddprint.ini sanitizado, garantindo que o agente aponte para o servidor de monitoramento correto imediatamente após a instalação.
-
-📦 How to Use / Como utilizar
-Clone this repository / Clone este repositório.
-
-Add the .msi installer and the .ini file to the same folder / Adicione o instalador .msi e o arquivo .ini na mesma pasta.
-
-Run Install-NDDPrint.ps1 as Administrator / Execute o script como Administrador.
+> Este repositório não contém dados de nenhuma empresa.
